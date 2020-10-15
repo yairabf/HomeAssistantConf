@@ -1,0 +1,269 @@
+# Configure a default setup of Home Assistant (frontend, api, etc)
+default_config:
+frontend:
+  themes: !include_dir_merge_named themes
+
+# Text to speech
+tts:
+  - platform: google_translate
+    base_url: !secret https_url
+
+google_assistant:
+  project_id: !secret google_assistant_project_id
+  service_account: !include MyAssist.json
+  report_state: true
+  exposed_domains:
+    - fan
+    - climate
+    - scene
+  entity_config:
+    input_boolean.ac_dumper:
+      expose: true
+      name: AC Dumper
+    media_player.bedroom_tv:
+      expose: true
+      name: Bedroom TV
+    media_player.samsung_65:
+      expose: true
+      name: Living Room TV
+    media_player.receiver:
+      expose: true
+      name: Receiver
+
+      
+
+
+
+# Example configuration.yaml entry
+google:
+  client_id: !secret google_client_id
+  client_secret: !secret google_client_secret
+  
+spotify:
+  client_id: !secret spotify_client_id
+  client_secret: !secret spotify_client_secret
+
+spotcast:
+  sp_dc: !secret spotcast_sp_dc
+  sp_key: !secret spotcast_sp_key
+  
+group: !include groups.yaml
+automation: !include_dir_list automations/
+script: !include_dir_merge_named scripts/
+scene: !include scenes.yaml
+# dev_pi: !include packages/dev_pi.yaml
+
+
+homeassistant:
+  customize: !include customize.yaml
+
+sonoff:
+  username: !secret yair_email
+  password: !secret sonoff_password
+
+binary_sensor:
+  - platform: workday
+    country: ISR
+
+input_boolean:
+  bedroom_tv:
+    name: Bedroom TV
+    icon: mdi:television
+  ac_dumper:
+    name: AC Dumper
+    icon: mdi:air-conditioner
+  sat_sched:
+    name: Sat Scheduler for summer
+    icon: mdi:scheduler
+
+
+switch:
+- platform: broadlink
+  mac: !secret broadlink_bedroom_mac
+  switches:
+      - name: "Bedroom TV"
+        command_on: 'JgDSAJOTETgSOBI4EhMRFBETEhMSExI4EjcSOBITEhMSExEUERMSExI4EhMSExEUERMSExITEjgSExE4EjgSOBI4ETgSOBIABgaUlBE4EjgSOBITERQRExITEhMSOBI4ETgSExITEhMSExITERMSOBITEhMSExITERMSExI4EhMSOBE4EjgSOBI3EjgSAAYGlJQSOBE4EjgSExITEhMRFBETEjgSOBI4ERMSExITEhMSExITEjcSExITEhMSExITEhMROBITEjgSOBE4EjgSOBI4EQANBQAAAAA='
+        command_off: 'JgDSAJOTETgSOBI4EhMRFBETEhMSExI4EjcSOBITEhMSExEUERMSExI4EhMSExEUERMSExITEjgSExE4EjgSOBI4ETgSOBIABgaUlBE4EjgSOBITERQRExITEhMSOBI4ETgSExITEhMSExITERMSOBITEhMSExITERMSExI4EhMSOBE4EjgSOBI3EjgSAAYGlJQSOBE4EjgSExITEhMRFBETEjgSOBI4ERMSExITEhMSExITEjcSExITEhMSExITEhMROBITEjgSOBE4EjgSOBI4EQANBQAAAAA='
+      
+      - name: "Bedroom Tv Volume"
+        command_on: "JgCgAJWSEg8SDxIPEg4TLxMvEg8SDxIwEjASMBIwEg8SDxIPEg4SkhIPEg8SDxIPEjASMBIwEg8SMBIvEy8SDxIPEg8SDxIwEg8SDxIPEjASAAcblpISDxIPEg8SDxIwEjASDxIPEi8TLxMvEjASDxIPEg8SDxKSEg8SDxIPEg8SLxMvEjASDxIwEjASMBIPEg8SDxIPEi8TDhMOEg8SMBIADQUAAAAAAAA="
+        command_off: "JgCgAJSSEg8SDxIPEg8SLxMvEw4SDxIwEjASMBIwEg8SDxIPEg4SkhIPEg8SDxIPEg8SDxIPEjASMBIwEi8TDhMvEy8SMBIPEg8SDxIPEjASAAcblpISDxIPEg8SDxIwEi8TDhMOEy8SMBIwEjASDxIPEg8SDhKTEg8SDhMOEw4TDhIPEg8SMBIwEjASMBIPEjASMBIvEw4TDhIPEg8SMBIADQUAAAAAAAA="
+        
+      - name: "Bedroom SoundBar" 
+        command_on: "JgDwAJKUERAQERAREBEQMhAyEBEQERAyEDERMRExEBEQERAREBEQlBAREBEQERAREBEQERAREBEQMhAxEDIQERAyEDIQMhAyEBEQERAREDERAAcdlJQREBAREBEQERAyEDIQERAREDIQMRExEDIQERAREBEQERCUEBEQERAREBEQEREQEBEQERAxETEQMhAREDIQMhAyEDIQERAREBEQMhAABx2UlBEQEBEQERAREDIQMhAREBEQMhAyEDIQMg8REBIQEBAREJUQEBAREBIPERAREBEQERAREDIQMRExEBEQMhAyEDIQMhAREBEQERAyEAANBQAAAAAAAA=="
+        command_off: "JgDwAJKUERAQERAREBEQMhAyEBEQERAyEDERMRExEBEQERAREBEQlBAREBEQERAREBEQERAREBEQMhAxEDIQERAyEDIQMhAyEBEQERAREDERAAcdlJQREBAREBEQERAyEDIQERAREDIQMRExEDIQERAREBEQERCUEBEQERAREBEQEREQEBEQERAxETEQMhAREDIQMhAyEDIQERAREBEQMhAABx2UlBEQEBEQERAREDIQMhAREBEQMhAyEDIQMg8REBIQEBAREJUQEBAREBIPERAREBEQERAREDIQMRExEBEQMhAyEDIQMhAREBEQERAyEAANBQAAAAAAAA=="
+      
+      - name: "AC Dumper"
+        command_on: "JgBcAb48ExETEhISEjUTERM1EzUSEhISExETNRISEjYSNhISEjYSERM1EjUTNRM1EjUTERM1ExETERMREzUTNRI1ExISEhI1EzUTNRI1EzUTNRI1EzUTNRI1EzUTNRI1EzUTNRI1ExETEhISEhISEhISEzUSEr49ExETEhISEjUTERM1EzUSEhMRExISNRMREjYSNhMQEzUTERM1EjUTNRM1EjUTEhI1ExETERMREzUTNRI1ExISEhI1EzUTNRI1EzUTNRI1EzUTNRI1EzUTNRI1EzUTNBM1ExETERMSEhISEhISEjUTEr49ExETERMREzUTERM1EjYTERISEhISNhISEjYTNRESEzUSEhI1EzUTNRI1EzUTERM1EhITERMREzUSNRM1ExETERM1EzUSNRM1EzUSNRM1EzUSNRM1EzUSNRM1EzUSNRM1ExETERMRExETERMSEjUTEQABAAANBQAAAAAAAAAAAAA="
+        command_off: "JgBcAcA7ExAUEBQQFDQUEBQ0ExETNBQREzQUEBQREzQUNBQ0ExETERQQFDQTNBQ0FBAUNBQQFBAUEBQ0FBAUNBM0FDQUEBQ0FDMUNBQ0FDMUNBQ0FDQUMxQ0FDQUMxQ0FDQUMxQ0FBAUEBQQFBEUMxQQFDQUEME7FBAUEBQQFDQUEBQzFRAUMxQQFDQUEBQQFDQUNBQzFBAVEBQQFDMUNBQ0FBAUMxUQFBAUEBQzFRAUMxQ0FDQUEBQzFTMUNBQ0FDMUNBQ0FDMUNBQ0FDMUNBQ0FDMUNBQ0FBAUEBQQFBAUNBQQFDMUEcA7FBAUEBQREzQUEBQ0FBAUNBMREzQUERMREzQUNBQ0ExETERMRFDQTNBQ0FBAUNBMRExEUEBQ0ExETNBQ0FDQTERQ0EzQUNBQ0EzQUNBQ0EzQUNBQ0EzQUNBQ0EzQUNBQ0ExEUEBQQFBAUNBQQFDMUEQABAAANBQAAAAAAAAAAAAA="
+
+climate:
+  # - platform: smartir
+  #   name: Bedroom AC
+  #   unique_id: bedroom_ac
+  #   device_code: 1181
+  #   controller_data: remote.bedroom_remote
+  #   temperature_sensor: sensor.sonoff_badroom_temperature
+  #   humidity_sensor: sensor.sonoff_badroom_humidity
+  #   power_sensor: binary_sensor.ac_power
+
+  - platform: smartir
+    name: Main AC
+    unique_id: main_ac
+    device_code: 1340
+    controller_data: remote.living_room_remote
+    temperature_sensor: sensor.sonoff_living_room_temperature
+    humidity_sensor: sensor.sonoff_living_room_humidity
+    power_sensor: binary_sensor.ac_power
+
+  - platform: ekon
+     # This currently unused:
+    name: Main account
+      # Specify the name and password for your account
+    username: !secret yair_email
+    password: !secret ekon_password
+    temperature_sensor: sensor.sonoff_living_room_temperature
+    #humidity_sensor: sensor.sonoff_living_room_humidity
+    base_url: https://www.activate-ac.com/
+    ws_url: wss://www.activate-ac.com/v2
+    ssl_ignore: True
+    # ws_url: wss://www.activate-ac.com/v2
+      # **UNTESTED** Alternative EKON tadiran server
+      # base_url: https://www.airconet.xyz/
+      
+
+bring_shopping_list:
+  lists:
+    - id: !secret bring_shopping_list_id
+      name: Shopping
+      locale: en-US
+     
+
+media_player:
+  - platform: smartir
+    name: Bedroom TV
+    unique_id: bedroom_tv
+    device_code: 1060
+    controller_data: remote.bedroom_remote
+    source_names:
+      HDMI1: Amazon Fire TV
+  
+  - platform: smartir
+    name: Receiver
+    device_class: speaker
+    unique_id: receiver
+    device_code: 1121
+    controller_data: remote.living_room_remote
+ 
+
+  - platform: androidtv
+    host: !secret amazom_fire_ip
+    name: amazon_fire
+    device_class: firetv
+    adb_server_ip: 127.0.0.1
+    adb_server_port: 5037
+    get_sources: true
+    turn_on_command: "input keyevent 3"
+    turn_off_command: "input keyevent 223"
+    exclude_unnamed_apps: true
+    apps:
+        com.amazon.tv.launcher: "Fire TV"
+        com.cellcom.cellcom_tv:  "Cellcom TV"
+        com.plexapp.android: "Plex"
+        com.netflix.ninja: "Netflix"
+        com.amazon.firetv.youtube: "YouTube"
+        com.stremio.one: "Stremio"
+
+
+samsungtv_smart:
+  - host: !secret samsungtv_ip
+    api_key: !secret samsungtv_smart_api_key
+    name: Samsung_65
+    mac: !secret samsungtv_mac
+    source_list: '{"MiBox": "ST_HDMI1", "Steam Link": "ST_HDMI2"}'
+    app_list: '{"Netflix": "11101200001", "YouTube": "111299001912", "Spotify": "3201606009684", "Plex":"3201512006963"}'
+  
+vacuum:
+  - platform: xiaomi_miio
+    host: !secret vacuum_xiaomi_miio_ip
+    token: !secret vacuum_xiaomi_miio_token
+    
+input_select:
+  vacuum_room:
+    name: Choose a room to clean
+    options:
+      - Select Input
+      - Living Room
+      - Kitchen
+      - Kids Room
+      - Office
+      - Hallway
+      - Bathroom
+      - Laundry Room
+      - Master Bedroom
+      - Master Bathroom
+    initial: Select Input
+    
+  bedroom_tv_source:
+    name: Bedroom TV Sources
+    options:
+      - "TV"
+      - "Amazon Fire TV"
+      
+  bedroom_soundbar_source:
+    name: Bedroom SoundBar Sources
+    options:
+      - "Optical"
+      - "Bluetooth"
+      
+      
+#- yeelight
+yeelight:
+  devices:
+    !secret yeelight_ceiling_ip:
+      name: Ceiling light
+      model: ceiling13
+   
+# Example entry for configuration.yaml
+sensor:
+  - platform: waze_travel_time
+    origin: zone.home
+    destination: zone.yair_work
+    name: Yair home to work
+    region: 'IL'
+  - platform: waze_travel_time
+    origin: zone.home
+    destination: zone.maggy_work
+    name: Maggy home to work
+    region: 'IL'
+  - platform: waze_travel_time
+    origin: zone.yair_work
+    destination: zone.home
+    name: Yair work to home
+    region: 'IL'
+  - platform: waze_travel_time
+    origin: zone.maggy_work
+    destination: zone.home
+    name: Maggy work to home
+    region: 'IL'
+  - platform: command_line
+    name: CPU Temp
+    command: "/bin/cat /sys/class/thermal/thermal_zone0/temp"
+    unit_of_measurement: "ºC"
+    value_template: '{{ value | multiply(0.001) }}'
+  - platform: systemmonitor
+    resources:
+    - type: disk_use_percent
+    - type: disk_free
+    - type: memory_free
+    - type: memory_use_percent
+    - type: processor_use
+    - type: last_boot
+    
+      
+python_script:
+
+# logger:
+#   default: info
+#   logs:
+#     homeassistant.components.python_scripts: debug

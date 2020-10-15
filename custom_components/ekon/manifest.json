@@ -1,0 +1,8 @@
+{
+  "domain": "ekon",
+  "name": "Ekon Wifi A/C Componenet",
+  "documentation": "https://github.com/hllhll/HomeAssistant-EKON-iAircon/",
+  "dependencies": [],
+  "codeowners": ["@hllhll"],
+  "requirements": []
+}

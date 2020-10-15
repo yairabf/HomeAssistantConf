@@ -1,0 +1,8 @@
+vacuum_parents_bath:
+  alias: "Vacuum Parents Bath"
+  sequence:
+    - service: vacuum.send_command
+      data:
+        entity_id: vacuum.xiaomi_vacuum_cleaner
+        command: app_segment_clean
+        params: [18]

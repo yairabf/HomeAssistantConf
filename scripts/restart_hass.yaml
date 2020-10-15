@@ -1,0 +1,13 @@
+restart_hass:
+  alias: "Restart HomeAssistant"
+  sequence:
+  - data:
+      data:
+        push:
+          badge: 5
+      message: Rebooting...
+    service: notify.mobile_app_oneplus_a5010
+  - service: homeassistant.restart
+    data: {}
+  mode: single
+

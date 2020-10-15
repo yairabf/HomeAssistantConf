@@ -1,0 +1,7 @@
+
+- cal_id: maggyair@gmail.com
+  entities:
+  - device_id: maggyair_gmail_com
+    ignore_availability: true
+    name: maggyair@gmail.com
+    track: true

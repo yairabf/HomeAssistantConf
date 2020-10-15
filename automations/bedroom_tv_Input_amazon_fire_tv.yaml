@@ -1,0 +1,13 @@
+
+  alias: Select Bedroom TV Input Amazon Fire TV
+  description: ''
+  trigger:
+  - entity_id: input_select.bedroom_tv_source
+    platform: state
+  condition: []
+  action:
+  - data:
+      hsot: 192.168.1.60
+      packet: JgDSAJKTFDYUNhQ1FBEUERQRFBEUERM2FDYUNhQRExEUERQRFBEUNhQRExEUERQRFBEUERQRExEUNhQ2FDUUNhQ2FDYTNhQABgSVkhQ2FDYUNRQRFBEUERMSExITNhQ2FDYUERQRExISEhMSEzcTEhMSExETEhMSExITEhMSEzYTNxM3EzYTNxM3EzcTAAYElJQTNxI3EzcTEhMSExISEhMSEzcTNxI4EhITEhMSExITEhI3ExITEhMSExISExISExITEhM3EzYTNxM3EzcSNxM3EwANBQAAAAA=
+    service: broadlink.send
+  mode: single

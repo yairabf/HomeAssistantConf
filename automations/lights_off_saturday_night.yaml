@@ -1,0 +1,27 @@
+  alias: Lights off Saturday night
+  description: ''
+  trigger:
+  - at: '00:00:00'
+    platform: time
+  condition:
+  - condition: time
+    weekday:
+    - sat
+  action:
+  - service: switch.turn_off
+    data: {}
+    entity_id: switch.dining_tuya
+  - service: switch.turn_off
+    data: {}
+    entity_id: switch.kitchen_light
+  - service: switch.turn_off
+    data: {}
+    entity_id: switch.sonoff_couch
+  - service: yeelight.set_mode
+    data:
+      mode: moonlight
+    entity_id: light.ceiling_light
+  - service: switch.turn_off
+    data: {}
+    entity_id: switch.sonoff_kitchen_spotlights
+  mode: single

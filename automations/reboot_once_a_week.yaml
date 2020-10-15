@@ -1,0 +1,19 @@
+  alias: Reboot Once A Week
+  description: ''
+  trigger:
+  - at: '10:00:00'
+    platform: time
+  condition:
+  - condition: time
+    weekday:
+    - tue
+  action:
+  - data:
+      data:
+        push:
+          badge: 5
+      message: Rebooting...
+    service: notify.mobile_app_oneplus_a5010
+  - data: {}
+    service: homeassistant.restart
+  mode: single
