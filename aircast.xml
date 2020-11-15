@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<aircast>
+<common>
+<enabled>1</enabled>
+<stop_receiver>0</stop_receiver>
+<media_volume>1.0000</media_volume>
+<latency></latency>
+<codec>flac</codec>
+<artwork></artwork>
+<drift>0</drift>
+<metadata>1</metadata>
+</common>
+<main_log>info</main_log>
+<cast_log>info</cast_log>
+<util_log>warn</util_log>
+<log_limit>-1</log_limit>
+<max_players>32</max_players>
+<device>
+<udn>d1686af488bd010f8d3156d141532b71</udn>
+<name>Office speaker+</name>
+<mac>cc:cc:2f:f6:d3:4f</mac>
+<enabled>1</enabled>
+</device>
+<device>
+<udn>6200e104-42d2-4461-807f-59ab9e117542</udn>
+<name>Home group+</name>
+<mac>cc:cc:ce:42:48:54</mac>
+<enabled>1</enabled>
+</device>
+<device>
+<udn>fc430953-9b20-48d3-b4c7-4a20258f4e1b</udn>
+<name>Living room group+</name>
+<mac>cc:cc:f2:44:43:05</mac>
+<enabled>1</enabled>
+</device>
+<device>
+<udn>3600b781-c2b3-4e73-8862-b92f77a66054</udn>
+<name>Home group+</name>
+<mac>cc:cc:d0:0f:6f:06</mac>
+<enabled>1</enabled>
+</device>
+<device>
+<udn>bb78702b-54ef-4599-9019-63304741c6ca</udn>
+<name>Home group+</name>
+<mac>cc:cc:a2:50:5e:86</mac>
+<enabled>1</enabled>
+</device>
+<device>
+<udn>8b665c3189fb9498239926caf791894b</udn>
+<name>Stereo+</name>
+<mac>cc:cc:8f:a3:69:62</mac>
+<enabled>1</enabled>
+</device>
+<device>
+<udn>0921f58fdd9bf4db62a6fe7691ee1336</udn>
+<name>Kitchen speaker+</name>
+<mac>cc:cc:65:f8:11:06</mac>
+<enabled>1</enabled>
+</device>
+<device>
+<udn>0b43e95cb2a08cb3e9dd2b3db45a60a3</udn>
+<name>mibox+</name>
+<mac>cc:cc:55:b5:7f:b7</mac>
+<enabled>1</enabled>
+</device>
+</aircast>

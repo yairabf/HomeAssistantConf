@@ -1,0 +1,20 @@
+
+- cal_id: maggyair@gmail.com
+  entities:
+  - device_id: maggyair_gmail_com
+    ignore_availability: true
+    name: maggyair@gmail.com
+    track: true
+- cal_id: ug3kkie05puc1sabpjppnhfn9c@group.calendar.google.com
+  entities:
+  - device_id: choicefreak_plans
+    ignore_availability: true
+    name: ChoiceFreak plans
+    track: true
+
+- cal_id: i6c7qen96cabuojdcu6pmeqahs@group.calendar.google.com
+  entities:
+  - device_id: choicefreak_options
+    ignore_availability: true
+    name: ChoiceFreak options
+    track: true

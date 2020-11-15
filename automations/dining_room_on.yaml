@@ -1,0 +1,14 @@
+  alias: Dining Room on Sat
+  description: ''
+  trigger:
+  - platform: time
+    at: '11:45'
+  condition:
+  - condition: time
+    weekday:
+    - sat
+  action:
+  - service: switch.turn_on
+    data:
+      entity_id: switch.dining_tuya
+  mode: single

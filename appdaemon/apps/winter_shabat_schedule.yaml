@@ -1,0 +1,27 @@
+  module: hass_apps_loader
+  class: SchedyApp
+
+  actor_type: thermostat
+
+  rooms:
+
+    living:
+      actors:
+        climate.living_1:
+        climate.living_2:
+      schedule:
+
+    bed:
+      actors:
+        climate.bed_1:
+      schedule:
+
+    kids1:
+      actors:
+        climate.kids1_1:
+      schedule:
+
+    kids2:
+      actors:
+        climate.kids2_1:
+      schedule:

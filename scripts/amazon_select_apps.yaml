@@ -1,0 +1,13 @@
+start_netflix:
+  sequence:
+  - service: media_player.select_source
+    data:
+      entity_id: media_player.amazon_fire
+      source: 'com.netflix.ninja'
+
+stop_netflix:
+  sequence:
+  - service: media_player.select_source
+    data:
+      entity_id: media_player.amazon_fire
+      source: '!com.netflix.ninja'

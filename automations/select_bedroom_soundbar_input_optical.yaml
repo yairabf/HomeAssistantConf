@@ -1,0 +1,13 @@
+
+  alias: Select Bedroom SoundBar Input Optical
+  description: ''
+  trigger:
+  - entity_id: input_select.bedroom_soundbar_source
+    platform: state
+  condition: []
+  action:
+  - data:
+      host: 192.168.1.60
+      packet: JgDwAJSSEg8SDxIPEg4TLxMvEg8SDxIwEjASMBIwEg8SDxIPEg4SkhMOEg8SDxIPEjASMBIPEg8SMBIPEg8SLxMOEw4TLxIwEg8SMBIwEg8SAAcclpISDhIPEg8SDxIwEjASDxIPEjASLxMvEy8TDhIPEg8SDxKSEg8SDxIPEg8SMBIvEw4TDhMvEg8SDxIwEg8SDxIwEjASDxIwEi8TDhMABxuWkhIPEg8SDxIPEi8TLxMOEg8SMBIwEjASMBIPEg8SDxIOEpITDhMOEg8SDxIwEjASDxIPEjASDxIPEjASDxIPEjASMBEPEjESLxIPEgANBQAAAAAAAA==
+    service: broadlink.send
+  mode: single

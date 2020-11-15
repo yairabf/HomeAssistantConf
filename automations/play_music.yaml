@@ -1,0 +1,24 @@
+  alias: Play Music
+  description: ''
+  trigger:
+  - event_data:
+      domain: scene
+      service: turn_on
+      service_data:
+        entity_id: scene.play_music
+    event_type: call_service
+    platform: event
+  condition: []
+  action:
+  - service: media_player.turn_on
+    data: {}
+    entity_id: media_player.receiver
+  - service: media_player.select_source
+    data:
+      source: Music scene
+    entity_id: media_player.receiver
+  - service: spotcast.start
+    data:
+      uri: "https://open.spotify.com/playlist/37i9dQZF1E37Jlt2Bs48DZ?si=-v6tKE-WS6mDAIgXGjy5Mw"
+      entity_id: media_player.chromecast_stereo
+  mode: single

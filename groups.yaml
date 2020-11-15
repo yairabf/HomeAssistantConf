@@ -1,0 +1,40 @@
+light:
+    name: lights
+    entities: 
+      - light.bathroom_light
+      - light.bathroom_mirror
+      - light.ceiling_light
+      - light.couch_lamp
+      - light.dining_lights
+      - light.door_light
+      - light.kids_night_lamp
+      - light.kitchen_light
+      - light.kitchen_spotlights
+      - light.parents_bath_main_light
+      - light.parents_bathroom_mirror
+      - light.parents_bedrrom_light
+      - light.sonoff_kids_room
+      - light.sonoff_office
+climate:
+    name: ACs
+    entities:
+      - climate.main_ac
+
+media_player:
+    name: TV
+    entities:
+      - media_player.samsung_65
+      - media_player.bedroom_amazon_tv
+
+fans:
+    name: fans
+    entities:
+      - fan.sonoff_office
+      - fan.sonoff_kids_room
+switch:
+    name: switch
+    entities:
+      - switch.boiler_tuya
+
+
+ 

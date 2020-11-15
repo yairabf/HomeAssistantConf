@@ -1,0 +1,12 @@
+.google.token
+secrets.yaml
+scripts.yaml
+MyAssist.json
+*/storage/
+/Volumes/config/home-assistant_v2.db
+home-assistant_v2.db
+home-assistant.log
+.storage/*
+.esphome/*
+.themes/*
+*.db

@@ -1,0 +1,49 @@
+- id: '1600193133162'
+  name: Shabat_clock_winter
+  entities:
+    automation.ac_sat_night:
+      last_triggered:
+      mode: single
+      current: 0
+      friendly_name: AC sat night
+      state: 'off'
+    automation.ac_sat_noon:
+      last_triggered:
+      mode: single
+      current: 0
+      friendly_name: AC sat noon
+      state: 'off'
+    automation.dining_room_off_sat:
+      last_triggered:
+      mode: single
+      current: 0
+      friendly_name: Dining Room off Sat
+      state: 'on'
+    automation.dining_room_on_sat:
+      last_triggered:
+      mode: single
+      current: 0
+      friendly_name: Dining Room on Sat
+      state: 'off'
+    automation.lights_off_saturday_night:
+      last_triggered: '2020-09-15T19:48:00.004891+00:00'
+      mode: single
+      current: 0
+      friendly_name: Lights off Saturday night
+      state: 'off'
+    automation.living_room_lights_on_sat:
+      last_triggered:
+      mode: single
+      current: 0
+      friendly_name: Living Room Lights on sat
+      state: 'off'
+- id: '1602685139835'
+  name: Play Music
+  entities:
+    automation.play_music:
+      last_triggered: '2020-10-14T17:19:24.591119+00:00'
+      mode: single
+      current: 0
+      friendly_name: Play Music
+      state: 'on'
+  icon: mdi:music

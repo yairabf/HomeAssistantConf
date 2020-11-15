@@ -1,0 +1,13 @@
+  alias: Turn off all lights
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: input_boolean.home_is_occupied
+    from: 'on'
+    to: 'off'
+  condition: []
+  action:
+  - service: homeassistant.turn_off
+    data: {}
+    entity_id: group.light
+  mode: single

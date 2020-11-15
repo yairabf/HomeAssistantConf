@@ -1,0 +1,17 @@
+  alias: automate amazon fire tv
+  description: ''
+  trigger:
+  - entity_id: media_player.bedroom_tv
+    platform: state
+  condition: []
+  action:
+    - data_template:
+        command: > 
+          {% if is_state('media_player.bedroom_tv', 'on') -%} 
+          input keyevent 26
+          {%- else -%}
+          input keyevent 223
+          {%- endif %}
+        entity_id: media_player.amazon_fire
+      service: androidtv.adb_command
+  mode: single

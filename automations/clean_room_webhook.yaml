@@ -1,0 +1,11 @@
+  alias: Clean Room Webhook
+  description: ''
+  trigger:
+  - platform: webhook
+    webhook_id: clean_room
+  condition: []
+  action:
+  - data_template:
+      room: '{{ trigger.json.room }}'
+    service: script.vacuum_dispatch
+  mode: single

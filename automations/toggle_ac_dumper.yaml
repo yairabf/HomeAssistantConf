@@ -1,0 +1,17 @@
+
+  alias: Toggle AC dumper
+  description: ''
+  trigger:
+  - entity_id: input_boolean.ac_dumper
+    platform: state
+  condition: []
+  action:
+    service_template: >
+        {% if is_state('input_boolean.ac_dumper', 'on') -%} 
+        switch.turn_on
+        {%- else -%}
+        switch.turn_off
+        {%- endif %}
+    data:
+      entity_id: switch.ac_dumper
+  mode: single

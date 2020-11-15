@@ -1,0 +1,21 @@
+
+life360_yair_abramovitch:
+  icon:
+  mac:
+  name: life360_yair_abramovitch
+  picture: https://www.life360.com/img/user_images/02339138-8f9a-420e-a39e-c3320c5cc2a0/0801cfea-dfd2-47a3-94f0-dc30a3da4ef6.jpg?fd=2
+  track: true
+
+life360_maggy_abramovitch:
+  icon:
+  mac:
+  name: life360_maggy_abramovitch
+  picture: https://www.life360.com/img/user_images/cd2bd937-1a6b-4a16-b1e4-0d1ad30e6e55/77d2d25e-0e6e-4962-8bc3-2bf77de46f78.jpg?fd=2
+  track: true
+
+yair_wifi:
+  name: yair_wifi
+  mac:
+  icon:
+  picture:
+  track: true

@@ -1,0 +1,12 @@
+
+  alias: Toggle Bedroom TV
+  description: ''
+  trigger:
+  - entity_id: input_boolean.bedroom_tv
+    platform: state
+  condition: []
+  action:
+  - data:
+      entity_id: switch.bedroom_tv
+    service: switch.toggle
+  mode: single

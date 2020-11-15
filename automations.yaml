@@ -1,0 +1,74 @@
+- id: '1601505128846'
+  alias: AC sat night
+  description: ''
+  trigger:
+  - platform: time
+    at: 00:00
+  condition:
+  - condition: time
+    weekday:
+    - sat
+  action:
+  - service: climate.turn_on
+    data:
+      entity_id: climate.ekon2550
+  - service: climate.set_temperature
+    data:
+      entity_id: climate.ekon2550
+      hvac_mode: cool
+      temperature: 23
+  mode: single
+- id: '1602686074431'
+  alias: play_music
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: media_player.receiver
+    from: 'off'
+    for: 'on'
+  condition: []
+  action:
+  - service: spotcast.start
+    data:
+      uri: https://open.spotify.com/playlist/37i9dQZF1E37Jlt2Bs48DZ?si=-v6tKE-WS6mDAIgXGjy5Mw
+    entity_id: media_player.chromecast_stereo
+  - service: media_player.turn_on
+    data: {}
+    entity_id: media_player.receiver
+  - service: media_player.select_source
+    data:
+      source: Music scene
+    entity_id: media_player.receiver
+  mode: single
+- id: '1602697082750'
+  alias: New Automation
+  description: ''
+  trigger:
+  - platform: event
+    event_data:
+      service_data:
+        entity_id:
+        - scene.play_music
+      domain: scene
+      service: turn_on
+    event_type: call_service
+  condition: []
+  action:
+  - service: media_player.turn_on
+    data: {}
+    entity_id: media_player.receiver
+  mode: single
+- id: '1602697744802'
+  alias: New Automation
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: scene.play_music
+    to: 'on'
+  condition: []
+  action:
+  - service: media_player.turn_on
+    data: {}
+    entity_id: media_player.receiver
+  mode: single
+

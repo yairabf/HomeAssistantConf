@@ -1,0 +1,21 @@
+  alias: Living Room Lights on sat
+  description: ''
+  trigger:
+  - platform: time
+    at: '16:50'
+  condition:
+  - condition: time
+    weekday:
+    - sat
+  action:
+  - type: turn_on
+    device_id: 6a885ab7cdd0433aa0f3d21d769c947a
+    entity_id: switch.ceiling_switch_tuya
+    domain: switch
+  - service: switch.turn_on
+    data:
+      entity_id: switch.door_tuya
+  - service: switch.turn_on
+    data:
+      entity_id: switch.kitchen_light
+  mode: single

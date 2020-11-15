@@ -1,0 +1,15 @@
+  alias: AC sat noon
+  description: ''
+  trigger:
+  - platform: time
+    at: '13:45'
+  condition:
+  - condition: time
+    weekday:
+    - sat
+  action:
+  - service: climate.set_temperature
+    data:
+      entity_id: climate.ekon2550
+      temperature: 22
+  mode: single

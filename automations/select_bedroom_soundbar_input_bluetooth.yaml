@@ -1,0 +1,13 @@
+
+  alias: Select Bedroom SoundBar Input Bluetooth
+  description: ''
+  trigger:
+  - entity_id: input_select.bedroom_soundbar_source
+    platform: state
+  condition: []
+  action:
+  - data:
+      host: 192.168.1.60
+      packet: JgDwAJSTEQ8SDxIPEg8SMBIwEg8SDxIvEy8TLxIwEg8SDxIPEg4TkhIPEg8SDxIPEi8TDhMvEg8SMBIPEg8SMBIPEjASDxIwEg8SLxMvEw4SAAcclpISDxIPEg8SDxIwEi8TDxIOEy8TLxIwEjASDxIPEg8SDhOSEg8SDxIPEg4TLxMOEy8SDxIwEg8SDxIwEg8SMBIPEi8TDhMvEy8SDxIABxyWkhIPEg8SDxIPEi8TLxMOEw4SMBIwEjASMBIPEg8SDxIOEpITDhMOEw4TDhMvEg8SMBIPEjASDxIPEjASDxIvEw4TLxMOEy8SMBIPEgANBQAAAAAAAA==
+    service: broadlink.send
+  mode: single

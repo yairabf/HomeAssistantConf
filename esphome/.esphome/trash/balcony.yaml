@@ -1,0 +1,23 @@
+esphome:
+  name: balcony
+  platform: ESP8266
+  board: esp01_1m
+
+wifi:
+  ssid: "maggyair"
+  password: "avivTAl@"
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Balcony Fallback Hotspot"
+    password: "rARbeliRofnl"
+
+captive_portal:
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+
+ota:
