@@ -1,0 +1,16 @@
+  alias: 'Spotify: Device Selected'
+  description: 'Starts music playing on the selected Chromecast Audio device'
+  trigger:
+    - platform: state
+      entity_id: input_select.chromecast_audio
+  condition: []
+  action:
+    - service: script.turn_on
+      data_template:
+        entity_id: >-
+            {% if states('input_select.chromecast_audio')|lower in ("office speaker", "kitchen speaker", "stereo", "google home group") %}
+            script.spotify_start_google
+            {% elif states('input_select.chromecast_audio')|lower in ("bedroom echo show", "echo kitchen", "echo group") %}
+            script.spotify_start_amazon
+            {% endif %}
+  mode: single

@@ -44,9 +44,14 @@ google_assistant:
     media_player.receiver:
       expose: true
       name: Receiver
-    switch.boiler_tuya:
+    switch.boiler:
       expose: true
       name: Boiler
+    light.ceiling_light:
+      expose: false
+
+jewish_calendar:
+  language: hebrew 
 
 alexa:
   smart_home:
@@ -65,7 +70,7 @@ alexa:
         - switch
         - media_player
       include_entities:
-        - switch.boiler_tuya
+        - switch.boiler
         - input_boolean.ac_dumper
         - media_player.samsung_65
         - media_player.receiver
@@ -105,22 +110,61 @@ bring_shopping_list:
       locale: en-US
       
 # localtuya:
-#   - host: !secret local_tuya_host
-#     device_id: !secret local_tuya_device_id
-#     local_key: !secret local_tuya_local_key
-#     friendly_name: Tuya Devices
-#     protocol_version: "3.3"
-#     entities:
-#       - platform: switch
-#         friendly_name: kitchen light
-#         id: 1
+#   # - host: !secret local_tuya_host_1
+#   #   device_id: !secret local_tuya_device_id_1
+#   #   local_key: !secret local_tuya_local_key_1
+#   #   friendly_name: kitchen light
+#   #   protocol_version: "3.3"
+#   #   entities:
+#   #     - platform: switch
+#   #       friendly_name: kitchen light
+#   #       id: 1
+  
+#   # - host: !secret local_tuya_host_2
+#   #   device_id: !secret local_tuya_device_id_2
+#   #   local_key: !secret local_tuya_local_key_2
+#   #   friendly_name: main_living_room
+#   #   protocol_version: "3.3"
+#   #   entities:
+#   #     - platform: switch
+#   #       friendly_name: dining
+#   #       id: 1
+#   #     - platform: switch
+#   #       friendly_name: door
+#   #       id: 2
+#   #     - platform: switch
+#   #       friendly_name: ceiling
+#   #       id: 3
+  
+#   # - host: !secret local_tuya_host_3
+#   #   device_id: !secret local_tuya_device_id_3
+#   #   local_key: !secret local_tuya_local_key_3
+#   #   friendly_name: Badroom light
+#   #   protocol_version: "3.3"
+#   #   entities:
+#   #     - platform: switch
+#   #       friendly_name: Badroom light
+#   #       id: 1
+  
+#   # - host: !secret local_tuya_host_4
+#   #   device_id: !secret local_tuya_device_id_4
+#   #   local_key: !secret local_tuya_local_key_4
+#   #   friendly_name: Parents bath
+#   #   protocol_version: "3.3"
+#   #   entities:
+#   #     - platform: switch
+#   #       friendly_name: Parents bath main
+#   #       id: 1
+#   #     - platform: switch
+#   #       friendly_name: Parents bath mirror
+#   #       id: 2
 
 
 # Home Assistant Components Section _________________________________
 
 binary_sensor:
   - platform: workday
-    country: ISR
+    country: IL
 
 input_boolean:
   bedroom_tv:
@@ -186,23 +230,23 @@ light:
   
   - platform: switch 
     name: "Dining Lights"
-    entity_id: switch.dining_tuya
+    entity_id: switch.dining
 
   - platform: switch 
     name: "Door Light"
-    entity_id: switch.door_tuya
+    entity_id: switch.door
   
   - platform: switch 
     name: "Parents Bath main light"
-    entity_id: switch.parents_bath_main_tuya
+    entity_id: switch.parents_bath_main
 
   - platform: switch 
     name: "Parents Bathroom mirror"
-    entity_id:  switch.parent_bath_mirror_tuya
+    entity_id:  switch.parent_bath_mirror
 
   - platform: switch 
     name: "Parents Bedrrom light"
-    entity_id: switch.badroom_light
+    entity_id: switch.bedroom_light
   
   - platform: switch 
     name: "Kitchen light"
@@ -275,22 +319,7 @@ media_player:
         com.netflix.ninja: "Netflix"
         com.amazon.firetv.youtube: "YouTube"
         com.stremio.one: "Stremio"
-  
-#   - platform: androidtv
-#     host: !secret mi_box_host
-#     name: mi_box
-#     device_class: androidtv
-#     adb_server_ip: 127.0.0.1
-#     adb_server_port: 5037
-#     get_sources: true
-#     turn_on_command: "input keyevent 3"
-#     turn_off_command: "input keyevent 223"
-#     exclude_unnamed_apps: true
-#     apps:
-#         com.cellcom.cellcom_tv:  "Cellcom TV"
-#         com.netflix.ninja: "Netflix"
-#         com.stremio.one: "Stremio"
-        
+
   - platform: samsungtv_tizen
     name: samsung_65
     api_key: !secret samsungtv_smart_api_key
@@ -352,6 +381,21 @@ media_player:
   #     source_list: '{"MiBox": "ST_HDMI1", "Steam Link": "ST_HDMI2"}'
   #     app_list: '{"Netflix": "11101200001", "YouTube": "111299001912", "Spotify": "3201606009684", "Plex":"3201512006963"}'
 
+#   - platform: androidtv
+#     host: !secret mi_box_host
+#     name: mi_box
+#     device_class: androidtv
+#     adb_server_ip: 127.0.0.1
+#     adb_server_port: 5037
+#     get_sources: true
+#     turn_on_command: "input keyevent 3"
+#     turn_off_command: "input keyevent 223"
+#     exclude_unnamed_apps: true
+#     apps:
+#         com.cellcom.cellcom_tv:  "Cellcom TV"
+#         com.netflix.ninja: "Netflix"
+#         com.stremio.one: "Stremio"
+
 camera:
   - platform: xiaomi_cloud_map_extractor
     host: !secret vacuum_xiaomi_miio_ip
@@ -380,6 +424,20 @@ input_select:
       - Master Bedroom
       - Master Bathroom
     initial: Select Input
+  
+  chromecast_audio:
+    name: Chromecast Audio
+    options:
+      - "Office speaker"
+      - "Kitchen speaker"
+      - "Stereo"
+      - 'Google Home Group'
+      - "yair's Echo show"
+      - "yair's Echo dot"
+      - "Echo Group"
+
+
+    icon: mdi:cast-audio
     
   bedroom_tv_source:
     name: Bedroom TV Sources
@@ -394,6 +452,8 @@ input_select:
       - "Bluetooth"
       
 sensor:
+  - platform: spotcast
+
   - platform: template
     sensors:
       outdoor_temperature:
@@ -435,9 +495,9 @@ sensor:
     - type: processor_use
     - type: last_boot
     
-  - platform: ping
-    hosts:
-      yair_wifi: !secret yair_5t_host
+#   - platform: ping
+#     hosts:
+#       yair_wifi: !secret yair_5t_host
 
 python_script:
 

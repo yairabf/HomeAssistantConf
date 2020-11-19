@@ -1,0 +1,13 @@
+spotify_start_google:
+  alias: 'Spotify: Start Playback on amazon'
+  sequence:
+        - service: media_player.select_source
+          data:
+            entity_id: media_player.spotify_yair_abramovitch
+            source: "{{ states('input_select.chromecast_audio') }}"
+        - service: media_player.play_media
+          data:
+            entity_id: media_player.spotify_yair_abramovitch
+            media_content_type: "music"
+  mode: single
+  icon: mdi:spotify
