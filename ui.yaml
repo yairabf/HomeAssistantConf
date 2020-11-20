@@ -1,0 +1,590 @@
+title: Home
+swipe_nav:
+  wrap: false
+  animate: swipe
+  prevent_default: true
+  swipe_amount: 30
+views:
+  - badges: []
+    cards:
+      - card:
+          show_name: true
+          show_state: true
+          title: Where is everyone
+          type: glance
+        entities:
+          - person.yair
+          - person.maggy
+        state_filter:
+          - home
+          - away
+        type: entity-filter
+      - type: 'custom:weather-card'
+        entity: weather.home
+        number_of_forecasts: '5'
+      - columns:
+          - from
+          - to
+          - duration
+          - distance
+          - icon
+        destinations:
+          - entity: sensor.yair_home_to_work
+            from: Home
+            to: Yair's work
+          - entity: sensor.maggy_home_to_work
+            to: Maggy's work
+          - entity: sensor.yair_work_to_home
+            from: Yair's work
+            to: Home
+          - entity: sensor.maggy_work_to_home
+            from: Maggy's work
+            to: Home
+        header: true
+        name: Route to...
+        type: 'custom:ha-card-waze-travel-time'
+        unit: km
+      - type: calendar
+        entities:
+          - calendar.maggyair_gmail_com
+      - type: entity
+        entity: input_boolean.home_is_occupied
+      - type: button
+        tap_action:
+          action: toggle
+        entity: input_boolean.house_guests
+      - type: entity
+        entity: sensor.jewish_calendar_date
+      - type: entity
+        entity: sensor.jewish_calendar_parshat_hashavua
+      - type: entities
+        entities:
+          - entity: sensor.jewish_calendar_upcoming_candle_lighting
+          - entity: sensor.jewish_calendar_upcoming_havdalah
+          - entity: sensor.jewish_calendar_shkia
+      - type: entity
+        entity: sensor.jewish_calendar_upcoming_shabbat_candle_lighting
+    path: agenda
+    title: Agenda
+  - badges:
+      - entity: binary_sensor.updater
+      - entity: binary_sensor.ceiling_light_nightlight
+      - entity: person.yair
+      - entity: sun.sun
+    cards:
+      - entities:
+          - entity: light.door_light
+          - entity: light.ceiling_light
+            type: 'custom:slider-entity-row'
+          - entity: light.dining_lights
+          - entity: light.couch_lamp
+          - entity: sensor.sonoff_living_room_humidity
+          - entity: sensor.sonoff_living_room_temperature
+          - entity: switch.ceiling
+        title: Living Room
+        type: entities
+      - buttons: null
+        entity: vacuum.xiaomi_vacuum_cleaner
+        image: /local/img/vacuum.png
+        labels:
+          battery: Battery
+          filter: Filter
+          main_brush: Main brush
+          mode: Mode
+          sensor: Sensor
+          side_brush: Side brush
+          status: Status
+        name: My Vacuum
+        type: 'custom:xiaomi-vacuum-card'
+        vendor: xiaomi
+      - entity: input_select.vacuum_room
+        type: entity
+      - entities:
+          - entity: light.bathroom_light
+          - entity: light.bathroom_mirror
+          - entity: switch.boiler
+        show_header_toggle: true
+        title: Bathroom
+        type: entities
+      - cards:
+          - entities:
+              - entity: light.kids_night_lamp
+              - entity: light.sonoff_kids_room
+              - entity: fan.sonoff_kids_room
+                type: 'custom:fan-control-entity-row'
+              - entity: sensor.sonoff_kids_temperature
+            title: Kids Room
+            type: entities
+        type: vertical-stack
+      - entities:
+          - entity: light.sonoff_office
+          - entity: fan.sonoff_office
+            type: 'custom:fan-control-entity-row'
+          - entity: sensor.sonoff_office_temperature
+          - entity: media_player.speaker_office
+            type: 'custom:mini-media-player'
+        title: Office
+        type: entities
+      - entities:
+          - entity: light.parents_bedrrom_light
+          - entity: sensor.sonoff_badroom_humidity
+          - entity: sensor.sonoff_badroom_temperature
+          - entity: input_boolean.ac_dumper
+            icon: 'mdi:air-conditioner'
+        title: Badroom
+        type: entities
+      - entities:
+          - entity: light.parents_bath_main_light
+          - entity: light.parents_bathroom_mirror
+          - entity: switch.boiler
+        title: Parent Bathroom
+        type: entities
+      - entities:
+          - entity: light.kitchen_spotlights
+          - entity: light.kitchen_light
+          - entity: media_player.kitchen_speaker
+            type: 'custom:mini-media-player'
+        title: kitchen
+        type: entities
+      - type: picture-glance
+        title: Kitchen
+        image: 'https://demo.home-assistant.io/stub_config/kitchen.png'
+        entities: []
+        entity: camera.xiaomi_cloud_map_extractor
+        camera_image: camera.xiaomi_cloud_map_extractor
+        tap_action:
+          action: more-info
+    path: default_view
+    title: Home
+  - badges: []
+    cards:
+      - type: 'custom:mini-media-player'
+        entity: media_player.bedroom_amazon_tv
+        name: Bedroom TV
+        icon: 'mdi:television'
+        style: |
+          :root {
+          /* #f0f0f0 in decimal RGB */
+          --color1: 191, 125, 39;
+          }
+          ha-card {   
+            {% if states(config.entity) == 'on' %}    
+              --ha-card-background:  #bf7d27b5;
+            {% endif %};   
+          }
+        artwork: cover
+        volume_stateless: true
+        shortcuts:
+          hide_when_off: true
+          attribute: source
+          buttons:
+            - icon: 'mdi:plex'
+              type: source
+              name: Plex
+              id: Plex
+            - icon: 'mdi:netflix'
+              type: source
+              name: Netflix
+              id: Netflix
+            - icon: 'mdi:youtube'
+              type: source
+              name: YouTube
+              id: YouTube
+            - icon: 'mdi:television-box'
+              type: source
+              name: Cellcom TV
+              id: Cellcom TV
+            - icon: 'mdi:movie-open'
+              type: source
+              name: Stremio
+              id: Stremio
+      - back:
+          service: androidtv.adb_command
+          service_data:
+            command: BACK
+            entity_id: media_player.amazon_fire
+        down:
+          service: androidtv.adb_command
+          service_data:
+            command: DOWN
+            entity_id: media_player.amazon_fire
+        entity: sun.sun
+        forward:
+          service: androidtv.adb_command
+          service_data:
+            command: input keyevent 90
+            entity_id: media_player.amazon_fire
+        home:
+          service: androidtv.adb_command
+          service_data:
+            command: HOME
+            entity_id: media_player.amazon_fire
+        left:
+          service: androidtv.adb_command
+          service_data:
+            command: LEFT
+            entity_id: media_player.amazon_fire
+        menu:
+          service: androidtv.adb_command
+          service_data:
+            command: MENU
+            entity_id: media_player.amazon_fire
+        name: FireTV
+        pauseplay:
+          service: androidtv.adb_command
+          service_data:
+            command: input keyevent 85
+            entity_id: media_player.amazon_fire
+        power:
+          service: androidtv.adb_command
+          service_data:
+            command: input keyevent 26
+            entity_id: media_player.amazon_fire
+        reverse:
+          service: androidtv.adb_command
+          service_data:
+            command: input keyevent 89
+            entity_id: media_player.amazon_fire
+        right:
+          service: androidtv.adb_command
+          service_data:
+            command: RIGHT
+            entity_id: media_player.amazon_fire
+        select:
+          service: androidtv.adb_command
+          service_data:
+            command: input keyevent 23
+            entity_id: media_player.amazon_fire
+        theme: Backend-selected
+        tv: false
+        type: 'custom:firetv-card'
+        up:
+          service: androidtv.adb_command
+          service_data:
+            command: UP
+            entity_id: media_player.amazon_fire
+      - type: 'custom:mini-media-player'
+        entity: media_player.samsung_65
+        name: Living Room TV
+        icon: 'mdi:television'
+        style: |
+          :root {
+          /* #f0f0f0 in decimal RGB */
+          --color1: 191, 125, 39;
+          }
+          ha-card {   
+            {% if states(config.entity) == 'on' %}    
+              --ha-card-background:  #bf7d27b5;
+            {% endif %};   
+          }
+        artwork: cover
+        volume_stateless: true
+        shortcuts:
+          hide_when_off: true
+          attribute: source
+          buttons:
+            - icon: 'mdi:television-box'
+              type: source
+              name: Mi-Box
+              id: MiBox
+            - type: source
+              name: Plex
+              id: Plex
+              icon: 'mdi:plex'
+            - icon: 'mdi:netflix'
+              type: source
+              name: Netflix
+              id: Netflix
+            - icon: 'mdi:steam'
+              type: source
+              name: Steam Link
+              id: Steam Link
+            - icon: 'mdi:youtube'
+              type: source
+              name: YouTube
+              id: media_player.select_source
+            - icon: 'mdi:spotify'
+              type: source
+              name: Spotify
+              id: Spotify
+      - type: 'custom:mini-media-player'
+        entity: media_player.receiver
+        style: |
+          ha-card {
+            {% if is_state('media_player.receiver', 'on') -%}
+               --ha-card-background: #bf7d27b5;
+            {% endif %};   
+          }
+        volume_stateless: true
+        shortcuts:
+          hide_when_off: true
+          attribute: source
+          buttons:
+            - icon: 'mdi:music'
+              type: source
+              name: Music scene
+              id: Music scene
+            - icon: 'mdi:radio'
+              type: source
+              name: Radio scene
+              id: Radio scene
+            - icon: 'mdi:movie'
+              type: source
+              name: Movie scene
+              id: Movie scene
+            - icon: 'mdi:basketball'
+              type: source
+              name: Sport scene
+              id: Sport scene
+      - entity: media_player.mibox_cast
+        type: 'custom:mini-media-player'
+      - type: entities
+        entities:
+          - type: 'custom:mini-media-player'
+            entity: media_player.spotify_yair_abramovitch
+            group: true
+            source: icon
+            info: short
+            artwork: full-cover
+            hide:
+              volume: true
+              power: true
+            shortcuts:
+              columns: 2
+              buttons:
+                - type: playlist
+                  name: Release Radar
+                  id: 'https://open.spotify.com/playlist/37i9dQZEVXbemhYoxjWSrU'
+                - type: playlist
+                  name: Discover Weekly
+                  id: 'https://open.spotify.com/playlist/37i9dQZEVXcOR8Cxx7Wz0K'
+                - type: playlist
+                  name: Daily Mix 1
+                  id: 'https://open.spotify.com/playlist/37i9dQZF1E37Jlt2Bs48DZ'
+                - type: playlist
+                  name: Daily Mix 2
+                  id: 'https://open.spotify.com/playlist/37i9dQZF1E367CvoLrtzYG'
+                - type: playlist
+                  name: Daily Mix 3
+                  id: 'https://open.spotify.com/playlist/37i9dQZF1E38kzKy9QpWFH'
+                - type: playlist
+                  name: Daily Mix 4
+                  id: 'https://open.spotify.com/playlist/37i9dQZF1E36u9C0Sx58St'
+                - type: playlist
+                  name: Daily Mix 5
+                  id: 'https://open.spotify.com/playlist/37i9dQZF1E352CoFKDIaXW'
+                - type: playlist
+                  name: Daily Mix 6
+                  id: 'https://open.spotify.com/playlist/37i9dQZF1E39A481QwnfK5'
+                - type: playlist
+                  name: My Shazams
+                  id: 'https://open.spotify.com/playlist/4KMPEhwp0FkovKGkQlmGQV'
+                - type: playlist
+                  name: Family Mix
+                  id: 'https://open.spotify.com/playlist/37i9dQZF1Egvxwk9lXp4VV'
+          - entity: input_select.chromecast_audio
+          - type: 'custom:mini-media-player'
+            entity: media_player.google_office
+            group: true
+            artwork: none
+            icon: null
+            hide:
+              info: true
+              controls: true
+              progress: true
+          - type: 'custom:mini-media-player'
+            entity: media_player.google_kitchen
+            group: true
+            artwork: none
+            icon: null
+            hide:
+              info: true
+              controls: true
+              progress: true
+          - type: 'custom:mini-media-player'
+            entity: media_player.google_stereo
+            group: true
+            artwork: none
+            icon: null
+            hide:
+              info: true
+              controls: true
+              progress: true
+          - type: 'custom:mini-media-player'
+            entity: media_player.google_homegroup
+            group: true
+            artwork: none
+            icon: null
+            hide:
+              info: true
+              controls: true
+              progress: true
+          - type: 'custom:mini-media-player'
+            entity: media_player.echo_kitchen
+            group: true
+            artwork: none
+            icon: null
+            hide:
+              info: true
+              controls: true
+              progress: true
+              source: true
+          - type: 'custom:mini-media-player'
+            entity: media_player.echo_show_bedroom
+            group: true
+            artwork: none
+            icon: null
+            hide:
+              info: true
+              controls: true
+              progress: true
+          - type: 'custom:mini-media-player'
+            entity: media_player.echo_group
+            group: true
+            artwork: none
+            icon: null
+            hide:
+              info: true
+              controls: true
+              progress: true
+      - type: entities
+        entities:
+          - remote.living_room_remote
+    icon: ''
+    path: media
+    title: Media
+  - badges: []
+    cards:
+      - entity: climate.ekon3593
+        name: Main AC
+        type: thermostat
+      - type: thermostat
+        entity: climate.main_ac
+        name: Living Room AC
+      - entity: sensor.sonoff_living_room_temperature
+        graph: line
+        type: sensor
+      - entity: sensor.sonoff_badroom_temperature
+        graph: line
+        type: sensor
+      - type: sensor
+        graph: line
+        entity: sensor.sonoff_kids_temperature
+      - type: sensor
+        graph: line
+        entity: sensor.sonoff_office_temperature
+      - type: 'custom:vertical-stack-in-card'
+        cards:
+          - type: 'custom:button-card'
+            entity: fan.sonoff_office
+            icon: 'mdi:fan'
+            state:
+              - value: 'on'
+                spin: true
+              - value: 'off'
+                color: 'rgb(255, 0, 0)'
+          - entity: fan.sonoff_office
+            type: 'custom:fan-control-entity-row'
+      - type: sensor
+        entity: sensor.outdoor_temperature
+        graph: line
+    path: climate
+    title: Climate
+  - title: scheduler
+    path: scheduler
+    badges: []
+    cards:
+      - type: entities
+        entities:
+          - entity: switch.schedule_01a06c
+          - entity: switch.schedule_1f64d6
+          - entity: switch.schedule_40afeb
+          - entity: switch.schedule_950028
+          - entity: switch.schedule_981602
+          - entity: switch.schedule_b1f06f
+          - entity: switch.schedule_b1f06f
+          - entity: switch.schedule_b619b1
+          - entity: switch.schedule_d373aa
+          - entity: switch.schedule_ec59b4
+        title: ' שעון שבת'
+      - type: 'custom:scheduler-card'
+        include:
+          - climate.main_ac
+          - fan.sonoff_kids_room
+          - fan.sonoff_office
+          - light.ceiling_light
+          - light.sonoff_kids_room
+          - light.sonoff_office
+          - switch.ac_dumper
+          - switch.badroom_light
+          - switch.bath_main_sonoff
+          - switch.bath_mirror_sonoff
+          - switch.boiler_tuya
+          - switch.dining_tuya
+          - switch.door_tuya
+          - switch.kitchen_light
+          - switch.parent_bath_mirror_tuya
+          - switch.parents_bath_main_tuya
+          - switch.sonoff_couch
+          - switch.sonoff_kids_night_lamp
+          - switch.sonoff_kitchen_spotlights
+  - title: Living Room
+    path: living-room
+    icon: 'mdi:sofa'
+    badges: []
+    cards:
+      - type: grid
+        cards:
+          - type: light
+            entity: light.door_light
+            name: Lights
+          - type: light
+            entity: light.ceiling_light
+          - type: light
+            entity: light.dining_lights
+          - type: light
+            entity: light.couch_lamp
+  - badges: []
+    cards:
+      - entities:
+          - entity: switch.adguard_filtering
+          - entity: switch.adguard_parental_control
+          - entity: switch.adguard_protection
+          - entity: switch.adguard_safe_browsing
+          - entity: switch.adguard_safe_search
+        title: My Title
+        type: entities
+      - entities:
+          - entity: sensor.adguard_average_processing_speed
+          - entity: sensor.adguard_parental_control_blocked
+          - entity: sensor.adguard_safe_browsing_blocked
+          - entity: sensor.adguard_dns_queries_blocked_ratio
+          - entity: sensor.adguard_dns_queries
+        title: My Title
+        type: entities
+      - type: entities
+        entities:
+          - entity: sensor.cpu_temp
+          - entity: sensor.disk_free
+          - entity: sensor.disk_use_percent
+          - entity: sensor.memory_free
+          - entity: sensor.memory_use_percent
+          - entity: sensor.processor_use
+          - entity: sensor.last_boot
+      - type: history-graph
+        entities:
+          - entity: sensor.cpu_temp
+        hours_to_show: 24
+        refresh_interval: 0
+      - type: glance
+        entities:
+          - entity: sensor.speedtest_download
+          - entity: sensor.speedtest_upload
+          - entity: sensor.speedtest_ping
+    icon: 'mdi:network'
+    panel: false
+    path: network
+    title: Network
+custom_header:
+  hidden_tab_redirect: false
+
